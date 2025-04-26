@@ -7,6 +7,10 @@ yarn-error.log*
 firebase-debug.log*
 firebase-debug.*.log*
 
+
+# Firebase admin key file (Ensure it's excluded)
+./functions/firebase-admin-key.json
+
 # Firebase cache
 .firebase/
 
@@ -64,3 +68,4 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
