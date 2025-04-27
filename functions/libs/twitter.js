@@ -1,5 +1,5 @@
 import { TwitterApi } from "twitter-api-v2";
-import { config } from "./config.js";
+import { config } from "../config.js";
 import { dbRef } from "./firebase.js";
 
 export const twitterClient = new TwitterApi({

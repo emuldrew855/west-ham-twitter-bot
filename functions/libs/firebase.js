@@ -1,6 +1,6 @@
 import admin from "firebase-admin";
 import fs from "fs";
-import { config } from "./config.js"; // Import config
+import { config } from "../config.js"; // Import config
 
 let dbRef; // Declare dbRef outside, but do not initialize yet
 

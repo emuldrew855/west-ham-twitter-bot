@@ -1,8 +1,12 @@
 import { OpenAI } from "openai";
-import { config } from "./config.js";
+import functions from "firebase-functions";
+import { config } from "../config.js";
+
+// Access the API key
+const openaiApiKey = functions.config().openai.api_key;
 
 const openai = new OpenAI({
-  apiKey: config.openaiApiKey, // Make sure the apiKey is passed correctly
+  apiKey: openaiApiKey,
 });
 
 export async function getAIResponse(prompt) {

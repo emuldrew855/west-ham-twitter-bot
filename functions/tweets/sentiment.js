@@ -1,6 +1,6 @@
 import axios from "axios";
 import Parser from "rss-parser";
-import { getAIResponse } from "./openapi.js";
+import { getAIResponse } from "../libs/openapi.js";
 const parser = new Parser();
 
 // TODO: Ensure trending tickers are relevant

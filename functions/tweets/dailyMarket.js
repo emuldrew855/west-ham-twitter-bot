@@ -1,5 +1,5 @@
 import axios from "axios";
-import { config } from "./config.js";
+import { config } from "../config.js";
 
 const gainersUrl = `https://financialmodelingprep.com/stable/biggest-gainers?apikey=${config.fmpAPIKey}`;
 const losersUrl = `https://financialmodelingprep.com/stable/biggest-losers?apikey=${config.fmpAPIKey}`;
