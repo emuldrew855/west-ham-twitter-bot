@@ -51,6 +51,13 @@ export async function tweet(tweetText) {
     console.log(`Error: No text to tweet, returning`);
     return;
   }
+
+  if (tweetText.length > 280) {
+    console.log(
+      `Tweet too long, needs to be shortened or split. Length: ${tweetText.length}`
+    );
+    return `Tweet too long, needs to be shortened or split. Length: ${tweetText.length}`;
+  }
   const { refreshToken } = (await dbRef.get()).data();
   const {
     client: refreshedClient,
@@ -62,12 +69,11 @@ export async function tweet(tweetText) {
   await dbRef.set({ accessToken, refreshToken: newRefreshToken });
 
   console.log(`Sending tweet: ${tweetText}`);
-  let data;
   try {
-    data = await refreshedClient.v2.tweet(tweetText);
+    const { data } = await refreshedClient.v2.tweet(tweetText);
+    return data;
   } catch (err) {
     console.log(`Err: ${err.toString()}`);
     return err;
   }
-  return data;
 }

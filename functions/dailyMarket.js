@@ -39,8 +39,8 @@ function top3(stockList) {
   const topThree = stockList
     .sort((a, b) => a.changesPercentage - b.changesPercentage) // Sort by percentage drop
     .slice(0, 3) // Take top 3
-    .map((stock) => `• $${stock.symbol} ${stock.changesPercentage.toFixed(2)}%`)
-    .join("\n");
+    .map((stock) => `$${stock.symbol} ${stock.changesPercentage.toFixed(2)}%`) // No decimal places
+    .join(", "); // Join with commas
   return topThree;
 }
 
@@ -54,12 +54,11 @@ async function fetchTopStocks(url) {
   }
 }
 
+// TODO Turn into format tweet function
 // Helper to generate tweet
 export async function getDailyMarketTweet() {
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-
-  const dateStr = yesterday.toLocaleDateString("en-US", {
+  const today = new Date();
+  const dateStr = today.toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -68,9 +67,7 @@ export async function getDailyMarketTweet() {
 
   const topLosers = await fetchTopStocks(gainersUrl);
   const topGainers = await fetchTopStocks(losersUrl);
-  const prompt = `
-
-📉 Market Wrap – ${dateStr}
+  const prompt = `📉 Market Wrap – ${dateStr}
 
 ${marketSummary}
 
@@ -80,7 +77,7 @@ ${topGainers}
 🚨 Top Losers:
 ${topLosers}
 
-#StockMarket #FinTwit #Investing #Trading #MarketUpdate #SP500 #NASDAQ #DowJones #Finance`;
+#StockMarket #FinTwit #Investing #SP500 #NASDAQ #DowJones #Finance`;
 
   return prompt;
 }
