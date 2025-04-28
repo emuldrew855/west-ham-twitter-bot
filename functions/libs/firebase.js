@@ -6,30 +6,14 @@ let dbRef; // Declare dbRef outside, but do not initialize yet
 
 // Initialize Firebase and return a promise that resolves once completed
 export async function initializeFirebase() {
-  const serviceAccountPath = config.googleCredentialsPath;
-  if (!serviceAccountPath) {
-    console.error("No service account path found in environment variables!");
-    return false; // Indicate failure
-  }
-
   try {
-    const serviceAccount = JSON.parse(
-      fs.readFileSync(serviceAccountPath, "utf8")
-    );
-    if (!serviceAccount.project_id) {
-      console.error("Service account missing project_id!");
-      return false; // Indicate failure
-    }
-
     admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
+      credential: admin.credential.applicationDefault(),
     });
-
-    console.log("Firebase initialized successfully!");
-    return true; // Indicate success
-  } catch (error) {
-    console.error("Error initializing Firebase:", error);
-    return false; // Indicate failure
+    return true;
+  } catch (err) {
+    console.log(`Err: ${err.toString()}`);
+    return false;
   }
 }
 

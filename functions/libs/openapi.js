@@ -4,6 +4,7 @@ import { config } from "../config.js";
 
 // Access the API key
 const openaiApiKey = functions.config().openai.api_key;
+// const openaiApiKey = config.openaiApiKey;
 
 const openai = new OpenAI({
   apiKey: openaiApiKey,

@@ -36,7 +36,7 @@ async function getFinanceHeadlines() {
 async function aiSummaryOfMarketSentiment() {
   const headlines = await getFinanceHeadlines();
   const prompt = `Please summarise really succinctly into 3 bullet points the general market sentiment based on these headlines. 
- Please use bullet points & use engaging emojis. Please keep each sentence max 11 words long.  Headlines "${headlines}"`;
+ Please use bullet points & use engaging emojis. Please keep each sentence max 9 words long.  Headlines "${headlines}"`;
   console.log(`Prompt: ${prompt}`);
   const response = await getAIResponse(prompt);
   return response;
